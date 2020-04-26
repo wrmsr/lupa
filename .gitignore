@@ -2,6 +2,7 @@
 
 .tox
 .idea
+.venv
 build
 dist
 MANIFEST

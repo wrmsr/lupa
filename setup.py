@@ -110,7 +110,14 @@ def lua_include(package='luajit'):
 def lua_libs(package='luajit'):
     libs_out = cmd_output('pkg-config %s --libs' % package)
     libs_out = decode_path_output(libs_out)
-    return libs_out.split()
+    parts = libs_out.split()
+    i = 0
+    while i < len(parts):
+        if parts[i] == '-pagezero_size':
+            del parts[i:i+2]
+        else:
+            i += 1
+    return parts
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
